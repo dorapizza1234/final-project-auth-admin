@@ -1,7 +1,7 @@
 # 🛒 중고거래 플랫폼 — 담당 파트
 
 > **팀 프로젝트** 중 내가 담당한 파트만 분리한 레포지토리입니다.
-> 인증/보안(JWT), 관리자 페이지, 광고 시스템, 마이페이지, 알림함을 구현했습니다.
+> 인증/보안(JWT), 관리자 페이지, 광고 시스템, 마이페이지 알림함을 구현했습니다.
 
 [![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
@@ -29,7 +29,7 @@
 |------|------|
 | Language | Java 17 |
 | Framework | Spring Boot 3.x |
-| Security | Spring Security + JJWT (JSON Web Token) |
+| Security | Spring Security + JWT (JSON Web Token) |
 | ORM | MyBatis |
 | Database | Oracle XE |
 | View | Thymeleaf |
