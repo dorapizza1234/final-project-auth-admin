@@ -137,11 +137,11 @@ src/main/java/com/spring/app/
 ├── ad/
 │   └── controller/AdController.java
 ├── admin/
-│   ├── aop/AdminProductAspect.java       ← AOP 로깅
+│   ├── aop/AdminProductAspect.java            ← AOP 로깅
 │   ├── controller/AdminController.java
-│   ├── domain/                            ← AdDTO, SearchDTO, StatDTO 등
+│   ├── domain/                                ← AdDTO, SearchDTO, StatDTO 등
 │   ├── model/AdminDAO, AdminDAO_imple
-│   ├── scheduler/SuspendScheduleRunner    ← 정지 예약 배치
+│   ├── scheduler/SuspendScheduleRunner        ← 정지 예약 배치
 │   └── service/AdminService, AdminService_imple
 ├── noti/
 │   ├── controller/NotiController.java
@@ -150,26 +150,41 @@ src/main/java/com/spring/app/
 │   └── service/NotiService, NotiService_imple
 ├── mypage/
 │   ├── controller/MyPageController.java
-│   ├── domain/                            ← AccountDTO, NotificationDTO 등
-│   ├── model/MyPageDAO, MyPageDAO_imple
-│   └── service/MyPageService, MyPageService_imple
+│   ├── domain/                                ← AccountDTO, NotificationDTO 등
+│   └── service/MyPageService.java
 ├── security/
-│   ├── controller/                        ← MemberController, TokenController
-│   ├── domain/                            ← MemberDTO, JwtToken, CustomUserDetails
-│   ├── jwt/                               ← JwtTokenProvider, JwtAuthenticationFilter
-│   ├── loginfail/                         ← 로그인 실패 핸들러
-│   ├── loginsuccess/                      ← 로그인 성공 핸들러
+│   ├── controller/                            ← MemberController, MemberFindController, TokenController
+│   ├── domain/                                ← MemberDTO, JwtToken, CustomUserDetails
+│   ├── jwt/                                   ← JwtTokenProvider, JwtAuthenticationFilter
+│   ├── loginfail/                             ← 로그인·소셜 로그인 실패 핸들러
+│   ├── loginsuccess/                          ← 로그인·소셜 로그인 성공 핸들러
 │   ├── model/MemberDAO, MemberDAO_imple
-│   └── scheduler/MemberIdleScheduler      ← 휴면 회원 처리
+│   └── scheduler/MemberIdleScheduler          ← 휴면 회원 처리
 ├── config/
 │   ├── SecurityConfig.java
-│   ├── AES256Config.java
-│   ├── FirebaseConfig.java
+│   ├── WebConfig.java
 │   └── WebSocketConfig.java
-└── common/
-    ├── AES256.java                        ← 계좌번호 암호화/복호화
-    ├── FileManager.java
-    └── MyUtil.java
+├── common/
+│   ├── FileManager.java
+│   ├── GlobalModelAdvice.java
+│   └── MyUtil.java
+├── exception/
+│   ├── BadWordException.java
+│   └── GlobalExceptionHandler.java
+└── aop/
+    └── MyAOP.java
+
+src/main/resources/
+├── mybatis/mapper/
+│   ├── admin.xml
+│   ├── member.xml
+│   ├── mypage.xml
+│   └── noti.xml
+└── templates/
+    ├── admin/                                 ← 관리자 페이지 (대시보드, 회원, 상품, 신고 등)
+    ├── fragment/                              ← header, footer
+    ├── mypage/mypage_message.html
+    └── noti/noti_list.html
 ```
 
 ---
