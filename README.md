@@ -5,7 +5,7 @@
 
 [![Java](https://img.shields.io/badge/Java-17-007396?style=flat-square&logo=openjdk&logoColor=white)](https://openjdk.org/)
 [![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?style=flat-square&logo=springboot&logoColor=white)](https://spring.io/projects/spring-boot)
-[![Spring Security](https://img.shields.io/badge/Spring%20Security-JWT-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
+[![Spring Security](https://img.shields.io/badge/Spring%20Security-JJWT-6DB33F?style=flat-square&logo=springsecurity&logoColor=white)](https://spring.io/projects/spring-security)
 [![MyBatis](https://img.shields.io/badge/MyBatis-ORM-DC382D?style=flat-square)](https://mybatis.org/)
 [![Oracle](https://img.shields.io/badge/Oracle%20DB-F80000?style=flat-square&logo=oracle&logoColor=white)](https://www.oracle.com/)
 
@@ -29,12 +29,11 @@
 |------|------|
 | Language | Java 17 |
 | Framework | Spring Boot 3.x |
-| Security | Spring Security + JJWT |
+| Security | Spring Security + JJWT (JSON Web Token) |
 | ORM | MyBatis |
 | Database | Oracle XE |
 | View | Thymeleaf |
 | Service Discovery | Spring Cloud Eureka Client |
-| 암호화 | AES-256 (계좌번호 암호화) |
 | 스케줄링 | Spring Scheduler |
 
 ---
@@ -182,9 +181,11 @@ src/main/java/com/spring/app/
 ```
 [클라이언트]
      │
-[Spring Boot 메인 서버 (Port: 9080)]  ← 이 레포 담당 파트 포함
-     │
-[Eureka Server]  ← 서비스 디스커버리
-     │
-[Oracle DB]
+[API Gateway]
+     ├── [메인 서버 (Port: 9080)]  ← 이 레포 담당 파트 포함
+     └── [Board Service (Port: 8002)]  ← 공지사항·FAQ·1:1문의
+          │
+     [Eureka Server]  ← 서비스 디스커버리
+          │
+     [Oracle DB]
 ```
