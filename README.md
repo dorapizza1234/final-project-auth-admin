@@ -150,7 +150,7 @@ src/main/java/com/spring/app/
 │   └── service/NotiService, NotiService_imple
 ├── mypage/
 │   ├── controller/MyPageController.java
-│   ├── domain/                                ← AccountDTO, NotificationDTO 등
+│   ├── domain/                                ← NotificationDTO 
 │   └── service/MyPageService.java
 ├── security/
 │   ├── controller/TokenController.java        ← Access Token 재발급
@@ -174,8 +174,6 @@ src/main/java/com/spring/app/
 src/main/resources/
 ├── mybatis/mapper/
 │   ├── admin.xml
-│   ├── member.xml
-│   ├── mypage.xml
 │   └── noti.xml
 └── templates/
     ├── admin/                                 ← 관리자 페이지 (대시보드, 회원, 상품, 신고 등)
