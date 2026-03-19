@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>리뷰 내역 관리</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/admin/sideBar.css}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <style>
+        .rating-star { color: #f6c23e; }
+    </style>
+</head>
+<body class="d-flex">
+    <aside th:replace="~{admin/admin_sidebar :: adminSidebar}"></aside>
+    <main class="main-content">
+        <div class="container-fluid">
+            <h4 class="fw-bold mb-4">리뷰 콘텐츠 관리</h4>
+
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="dashboard-card">
+                        <div class="small text-muted fw-bold">전체 리뷰 수</div>
+                        <div class="h3 fw-bold mb-0" th:text="${totalCount + '건'}">0건</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 검색 폼 -->
+            <form method="get" th:action="@{/admin/review}" class="mb-3 d-flex gap-2">
+                <input type="text" class="form-control form-control-sm" name="keyword"
+                       th:value="${searchKeyword}" placeholder="작성자/내용 검색" style="width:220px;">
+                <button class="btn btn-sm btn-primary">검색</button>
+            </form>
+
+            <div class="dashboard-card">
+                <div class="table-responsive">
+                    <table class="table table-hover align-middle">
+                        <thead class="table-light">
+                            <tr>
+                                <th>번호</th>
+                                <th>작성자</th>
+                                <th>별점</th>
+                                <th>한줄평</th>
+                                <th>리뷰 내용</th>
+                                <th>작성일</th>
+                                <th>관리</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr th:if="${#lists.isEmpty(reviewList)}">
+                                <td colspan="7" class="text-center text-muted">리뷰가 없습니다.</td>
+                            </tr>
+                            <tr th:each="review : ${reviewList}">
+                                <td th:text="${review.reviewNo}"></td>
+                                <td th:text="${review.nickname}"></td>
+                                <td>
+                                    <span class="rating-star">
+                                        <th:block th:each="i : ${#numbers.sequence(1, 5)}">
+                                            <i th:class="${i <= review.rating ? 'bi bi-star-fill' : 'bi bi-star'}"></i>
+                                        </th:block>
+                                    </span>
+                                    <small th:text="${review.rating}"></small>
+                                </td>
+                                <td th:text="${review.oneLineCat}"></td>
+                                <td th:text="${#strings.abbreviate(review.reviewContent, 50)}"></td>
+                                <td th:text="${#dates.format(review.createdAt, 'yyyy-MM-dd')}"></td>
+                                <td>
+                                    <button class="btn btn-sm btn-outline-danger"
+                                            th:attr="onclick='deleteReview(' + ${review.reviewNo} + ')'">삭제</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- 페이징 -->
+                <nav th:if="${totalPages > 1}" aria-label="Page navigation">
+                    <ul class="pagination justify-content-center mt-3">
+                        <li class="page-item" th:classappend="${currentPage == 1} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/review(page=${currentPage-1}, keyword=${searchKeyword})}">이전</a>
+                        </li>
+                        <li class="page-item" th:each="p : ${#numbers.sequence(1, totalPages)}"
+                            th:classappend="${p == currentPage} ? 'active'">
+                            <a class="page-link" th:href="@{/admin/review(page=${p}, keyword=${searchKeyword})}" th:text="${p}"></a>
+                        </li>
+                        <li class="page-item" th:classappend="${currentPage == totalPages} ? 'disabled'">
+                            <a class="page-link" th:href="@{/admin/review(page=${currentPage+1}, keyword=${searchKeyword})}">다음</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function deleteReview(reviewNo) {
+            if (!confirm("이 리뷰를 삭제 처리하시겠습니까?")) return;
+            fetch('/admin/review/delete', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+                body: 'reviewNo=' + reviewNo
+            })
+            .then(r => r.json())
+            .then(data => {
+                if (data.success) { alert('삭제되었습니다.'); location.reload(); }
+                else alert('삭제 실패');
+            });
+        }
+    </script>
+</body>
+</html>
