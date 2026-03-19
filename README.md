@@ -153,13 +153,10 @@ src/main/java/com/spring/app/
 │   ├── domain/                                ← AccountDTO, NotificationDTO 등
 │   └── service/MyPageService.java
 ├── security/
-│   ├── controller/                            ← MemberController, MemberFindController, TokenController
-│   ├── domain/                                ← MemberDTO, JwtToken, CustomUserDetails
+│   ├── controller/TokenController.java        ← Access Token 재발급
+│   ├── domain/JwtToken.java
 │   ├── jwt/                                   ← JwtTokenProvider, JwtAuthenticationFilter
-│   ├── loginfail/                             ← 로그인·소셜 로그인 실패 핸들러
-│   ├── loginsuccess/                          ← 로그인·소셜 로그인 성공 핸들러
-│   ├── model/MemberDAO, MemberDAO_imple
-│   └── scheduler/MemberIdleScheduler          ← 휴면 회원 처리
+│   └── loginsuccess/MyAuthenticationSuccessHandler ← JWT 생성·쿠키 세팅
 ├── config/
 │   ├── SecurityConfig.java
 │   ├── WebConfig.java
